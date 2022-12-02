@@ -42,14 +42,12 @@ let parse_elves l =
   aux l [] []
 
 let part1 filename =
-  In_channel.with_open_text filename In_channel.input_all
-  |> String.split_on_char '\n'
+  Utils.read_lines filename
   |> parse_elves
   |> find_most_callories
 
 let part2 filename =
-  In_channel.with_open_text filename In_channel.input_all
-  |> String.split_on_char '\n'
+  Utils.read_lines filename
   |> parse_elves
   |> List.map sum
   |> List.sort compare

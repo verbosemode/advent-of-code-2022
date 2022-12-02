@@ -72,19 +72,15 @@ module Part_2 = struct
     | _, Draw -> other
 end
 
-let read_lines filename =
-  In_channel.with_open_text filename In_channel.input_all
-  |> String.split_on_char '\n'
-
 let part1 filename =
-  read_lines filename
+  Utils.read_lines filename
   (* FIXME dafuq. just to drop the empty string at the end? *)
   |> List.filter (fun e -> String.length e <> 0)
   |> List.map Part_1.items_of_line
   |> List.fold_left (fun a e -> a + Part_1.calculate_my_score e) 0
 
 let part2 filename =
-  read_lines filename
+  Utils.read_lines filename
   (* FIXME dafuq. just to drop the empty string at the end? *)
   |> List.filter (fun e -> String.length e <> 0)
   |> List.map Part_2.items_of_line
