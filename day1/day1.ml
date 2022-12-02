@@ -1,6 +1,6 @@
 (*
 Day1-1: 69289
-Day1-2: 85813
+Day1-2: 205615
 *)
 
 let part1_test_input =
@@ -22,10 +22,12 @@ let part1_test_input =
 let part1_test_output =
   [ [ 2000; 3000 ]; [ 4000 ]; [ 5000; 6000 ]; [ 7000; 8000; 9000 ]; [ 10000 ] ]
 
+let sum = List.fold_left (+) 0
+
 let find_most_callories l =
   List.fold_left
     (fun a e ->
-      let callories = List.fold_left (fun a' e' -> a' + e') 0 e in
+      let callories = sum e in
       if callories > a then callories else a)
     0 l
 
@@ -49,7 +51,7 @@ let part2 filename =
   In_channel.with_open_text filename In_channel.input_all
   |> String.split_on_char '\n'
   |> parse_elves
-  |> List.map (fun e -> List.fold_left (fun a e' -> e' + a) 0 e)
+  |> List.map sum
   |> List.sort compare
   |> List.rev
   |> List.to_seq
