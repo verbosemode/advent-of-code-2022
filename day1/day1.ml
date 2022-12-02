@@ -3,26 +3,26 @@ Day1-1: 69289
 Day1-2: 205615
 *)
 
-let part1_test_input =
-  {|1000
-2000
-3000
+(* let part1_test_input = *)
+(*   {|1000 *)
+(* 2000 *)
+(* 3000 *)
+(**)
+(* 4000 *)
+(**)
+(* 5000 *)
+(* 6000 *)
+(**)
+(* 7000 *)
+(* 8000 *)
+(* 9000 *)
+(**)
+(* 10000|} *)
+(**)
+(* let part1_test_output = *)
+(*   [ [ 2000; 3000 ]; [ 4000 ]; [ 5000; 6000 ]; [ 7000; 8000; 9000 ]; [ 10000 ] ] *)
 
-4000
-
-5000
-6000
-
-7000
-8000
-9000
-
-10000|}
-
-let part1_test_output =
-  [ [ 2000; 3000 ]; [ 4000 ]; [ 5000; 6000 ]; [ 7000; 8000; 9000 ]; [ 10000 ] ]
-
-let sum = List.fold_left (+) 0
+let sum = List.fold_left ( + ) 0
 
 let find_most_callories l =
   List.fold_left
@@ -42,9 +42,7 @@ let parse_elves l =
   aux l [] []
 
 let part1 filename =
-  Utils.read_lines filename
-  |> parse_elves
-  |> find_most_callories
+  Utils.read_lines filename |> parse_elves |> find_most_callories
 
 let part2 filename =
   Utils.read_lines filename
