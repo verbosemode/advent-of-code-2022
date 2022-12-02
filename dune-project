@@ -1,0 +1,16 @@
+(lang dune 3.5)
+(name aoc2022)
+(generate_opam_files true)
+(source (github verbosemode/aoc2022))
+(authors "Jochen Bartl <jochen@verbosemo.de>")
+(maintainers "Jochen Bartl <jochen@verbosemo.de>")
+(license ISC)
+(documentation "https://verbosemode.github.io/aoc2022/")
+(package
+ (name aoc2022)
+ (synopsis "Advent of Code 2022")
+ (description "Advent of Code 2022")
+ (depends
+  (ocaml (>= 4.14.0))
+  (alcotest :with-test)
+  (odoc :with-doc)))
