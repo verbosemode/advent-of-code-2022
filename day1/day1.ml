@@ -1,3 +1,8 @@
+(*
+Day1-1: 69289
+Day1-2: 85813
+*)
+
 let part1_test_input =
   {|1000
 2000
@@ -40,4 +45,16 @@ let part1 filename =
   |> parse_elves
   |> find_most_callories
 
-let () = part1 Sys.argv.(1) |> print_int
+let part2 filename =
+  In_channel.with_open_text filename In_channel.input_all
+  |> String.split_on_char '\n'
+  |> parse_elves
+  |> List.map (fun e -> List.fold_left (fun a e' -> e' + a) 0 e)
+  |> List.sort compare
+  |> List.rev
+  |> List.to_seq
+  |> Seq.take 3
+  |> Seq.fold_left (fun a e -> e + a) 0
+
+let () = part1 Sys.argv.(1) |> Printf.printf "day1-1: %i\n"
+let () = part2 Sys.argv.(1) |> Printf.printf "day1-2: %i\n"
