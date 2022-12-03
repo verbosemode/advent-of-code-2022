@@ -65,15 +65,11 @@ end
 
 let part1 filename =
   Utils.read_lines filename
-  (* FIXME dafuq. just to drop the empty string at the end? *)
-  |> List.filter (fun e -> String.length e <> 0)
   |> List.map Part_1.items_of_line
   |> List.fold_left (fun a e -> a + Part_1.calculate_my_score e) 0
 
 let part2 filename =
   Utils.read_lines filename
-  (* FIXME dafuq. just to drop the empty string at the end? *)
-  |> List.filter (fun e -> String.length e <> 0)
   |> List.map Part_2.items_of_line
   |> List.fold_left
        (fun a ((other, _) as move) ->
