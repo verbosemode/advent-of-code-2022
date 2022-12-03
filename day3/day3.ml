@@ -28,7 +28,7 @@ let item_priority s =
   let comp2_set = CharSet.of_list (string_explode comp2) in
   let shared_item = CharSet.inter comp1_set comp2_set in
   assert (CharSet.cardinal shared_item = 1);
-  List.nth (CharSet.elements shared_item) 0 |> char_priority
+  char_priority (CharSet.choose shared_item)
 
 let group_by_3 l =
   let rec aux l a =
@@ -40,8 +40,7 @@ let group_by_3 l =
         let e3_set = CharSet.of_list (string_explode e3) in
         let shared_item = CharSet.inter (CharSet.inter e1_set e2_set) e3_set in
         assert (CharSet.cardinal shared_item = 1);
-        let item = List.nth (CharSet.elements shared_item) 0 in
-        aux t (a + char_priority item)
+        aux t (a + char_priority (CharSet.choose shared_item))
     | [ _; _ ] | _ :: [] -> raise Parser_error
   in
   aux l 0
