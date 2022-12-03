@@ -6,10 +6,13 @@ day2-2: 12424
 exception Parser_error
 
 (* let test1_input = {|A Y *)
-(* B X *)
-(* C Z|} *)
+   (* B X *)
+   (* C Z|} *)
 
-type items = Rock | Paper | Scissors
+type items =
+  | Rock
+  | Paper
+  | Scissors
 
 let item_to_score = function Rock -> 1 | Paper -> 2 | Scissors -> 3
 let draw = 3
@@ -35,7 +38,10 @@ module Part_1 = struct
 end
 
 module Part_2 = struct
-  type outcome = Win | Lose | Draw
+  type outcome =
+    | Win
+    | Lose
+    | Draw
 
   let item_of_char_exn = function
     | 'X' -> Lose

@@ -1,5 +1,4 @@
 version = 0.23.0
-profile = conventional
 break-infix = fit-or-vertical
+type-decl = sparse
 parse-docstrings = true
-indicate-multiline-delimiters = no
