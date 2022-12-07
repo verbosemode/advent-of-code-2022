@@ -1,5 +1,6 @@
 (*
 day5-1: SPFMVDTZT
+day5-2: ZFSJBPRFP
 *)
 
 exception Parse_error
@@ -88,6 +89,17 @@ let populate_move stacks move =
     Stack.push (Stack.pop src) dst
   done
 
+let populate_move_multiple stacks move =
+  let temp_stack = Stack.create () in
+  let src = Hashtbl.find stacks (move.src - 1) in
+  let dst = Hashtbl.find stacks (move.dst - 1) in
+  for i = 1 to move.items do
+    Stack.push (Stack.pop src) temp_stack;
+  done;
+  for i = 1 to move.items do
+    Stack.push (Stack.pop temp_stack) dst;
+  done
+
 let string_top_of_the_stacks stacks =
   let num_stacks = Hashtbl.length stacks in
   let rec aux a i =
@@ -111,8 +123,19 @@ let part1 filename =
   List.iter (fun e -> populate_move stacks e) moves;
   string_top_of_the_stacks stacks
 
-(* let part2 filename = *)
-(*   Utils.read_lines filename |> List.fold_left (fun a e -> a + part2 e) 0 *)
+let part2 filename =
+  let moves =
+    Utils.read_lines filename
+    |> List.filter (fun e -> String.starts_with ~prefix:"move " e)
+    |> List.fold_left (fun a e -> parse_move e :: a) []
+    |> List.rev
+  in
+  let stack_lines = Utils.read_lines filename |> List.filter is_stack_line in
+  let num_stacks = get_stack_number stack_lines in
+  let stacks = prepare_stacks num_stacks in
+  fill_stacks stacks (List.rev stack_lines);
+  List.iter (fun e -> populate_move_multiple stacks e) moves;
+  string_top_of_the_stacks stacks
 
 let () = part1 Sys.argv.(1) |> Printf.printf "day5-1: %s\n"
-(* let () = part2 Sys.argv.(1) |> Printf.printf "day5-2: %i\n" *)
+let () = part2 Sys.argv.(1) |> Printf.printf "day5-2: %s\n"
